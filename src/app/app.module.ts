@@ -36,11 +36,12 @@ import {
 
 
 import { AppComponent } from './app.component';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 import { TaskItemComponent } from './task-item/task-item.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskService } from './task.service';
 import { TaskDialogComponent } from './task-dialog/task-dialog.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { TaskDialogComponent } from './task-dialog/task-dialog.component';
   imports: [
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     FormsModule,
     MatLineModule,
     MatToolbarModule,
@@ -85,7 +86,8 @@ import { TaskDialogComponent } from './task-dialog/task-dialog.component';
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     TaskService

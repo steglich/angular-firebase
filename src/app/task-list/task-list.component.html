@@ -1,4 +1,5 @@
-<mat-nav-list>
+<mat-spinner class="spinner" diameter="50" strokeWdth="3" *ngIf="loading"></mat-spinner>
+<mat-nav-list *ngIf="!loading">
   <app-task-item *ngFor="let task of tasks$ | async" [task]="task"
     (performTask)="onPerformTask($event)" (selectTask)="selectdTask=$event"
     [matMenuTriggerFor]="taskMenu">
